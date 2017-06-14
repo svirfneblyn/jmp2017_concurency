@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by.
  *
- * @author Ihar_rubanovich.
+ * @author Ihar_Rubanovich.
  */
 public class MapsAndThreadsAnalizer {
     private Map<Integer, Integer> hashMap = new HashMap<>();
@@ -48,7 +48,7 @@ public class MapsAndThreadsAnalizer {
         return fillHashMap;
     }
 
-    public Thread getHashMapConcurentKeySum() {
+    public Thread getHashMapConcurentKeySumatorThread() {
         Thread fillHashMap = new Thread(() -> {
 
             getHashMapConcurent().forEach((k, v) -> multiSummator(k, "c"));
@@ -57,7 +57,7 @@ public class MapsAndThreadsAnalizer {
         return fillHashMap;
     }
 
-    public Thread getHashMapSyncKeySum() {
+    public Thread getHashMapSyncKeySumatorThread() {
         Thread fillHashMap = new Thread(() -> {
 
             getHashMapConcurent().forEach((k, v) -> multiSummator(k, "s"));
@@ -66,7 +66,7 @@ public class MapsAndThreadsAnalizer {
         return fillHashMap;
     }
 
-    public Thread getHashMapKeySum() {
+    public Thread getHashMapKeySumatorThread() {
         Thread fillHashMap = new Thread(() -> {
 
             getHashMapConcurent().forEach((k, v) -> multiSummator(k, "h"));

@@ -1,12 +1,14 @@
-package counter;
+import counter.CounterHolder;
+import counter.DecrementatorThread;
+import counter.IncrementatorThread;
+import counter.SynchronizedCounter;
 
 /**
  * Created by.
  *
  * @author Ihar_rubanovich.
  */
-public class CounterTask {
-    public static int counter = 0;
+public class CounterTaskDemo {
 
     public static void main(String[] args) {
         Thread incrementator = new Thread(new IncrementatorThread());
@@ -26,7 +28,7 @@ public class CounterTask {
         }
         System.out.println("AtomicLong counter : " + syncCounter.getAtomicLongCounter() + " time : " + syncCounter.getAtomicCounterTime());
         System.out.println("synch counter : " + syncCounter.getCounter() + " time : " + syncCounter.getSyncCounterTime());
-        System.out.println("counter = " + counter);
+        System.out.println("counter = " + CounterHolder.counter);
     }
 }
 /*
@@ -34,7 +36,7 @@ public class CounterTask {
 *
 * increment cycle done count = 1537203
 decrement cycle done count = 1804779
-AtomicLong counter : 0 time : 84
-synch counter : 0 time : 2
+AtomicLong counter : 0 time : 110
+synch counter : 0 time : 120
 counter = 1804779
 * */

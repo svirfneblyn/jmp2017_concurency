@@ -10,8 +10,8 @@ public class DecrementatorThread implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < stop; i++ ){
-            CounterTask.counter++;
+            CounterHolder.counter--;
         }
-        System.out.println("decrement cycle done count = " + CounterTask.counter );
+        System.out.println("decrement cycle done count = " + CounterHolder.counter);
     }
 }

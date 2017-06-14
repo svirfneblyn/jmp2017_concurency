@@ -1,5 +1,4 @@
 package counter;
-
 /**
  * Created by.
  *
@@ -10,9 +9,9 @@ public class IncrementatorThread implements Runnable {
     @Override
     public void run() {
         for (int i = 0; i < stop; i++ ){
-            CounterTask.counter++;
+            CounterHolder.counter++;
         }
-        System.out.println("increment cycle done count = " + CounterTask.counter );
+        System.out.println("increment cycle done count = " + CounterHolder.counter);
 
     }
 }

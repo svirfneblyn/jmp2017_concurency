@@ -31,13 +31,13 @@ public class AbThread implements Runnable {
         try {
             while (!cache.available) {
                 try {
-                    condition.await();
+                    condition.awaitNanos(10L);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 cache.c(cache.getA());
                 cDone = true;
-                condition.signal();
+                condition.signalAll();
             }
         } finally {
             lock.unlock();
@@ -53,7 +53,7 @@ public class AbThread implements Runnable {
                 }
                 System.out.println("d(c+b) : c = " + cache.getC() + "b = " + cache.getB());
                 cache.d(cache.getC() + cache.getB());
-                condition.signal();
+                condition.signalAll();
             }
         } finally {
             lock.unlock();

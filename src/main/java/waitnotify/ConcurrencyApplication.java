@@ -1,20 +1,35 @@
 package waitnotify;
-
 /**
  * Created by.
  *
- * @author Ihar_rubanovich.
+ * @author Ihar_Rubanovich.
  */
 public class ConcurrencyApplication {
-
     static int a;
     static int b;
     static int c;
     static int d;
-    static final Object obj = new Object();
+    private static final Object obj = new Object();
 
     public static void main(String[] args) {
 
+        Thread notifier = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    System.out.println("notifyAll");
+                    if (a > 0 ) {
+                       notifyAll();
+                       System.out.println("notifyAll");
+                        try {
+                            sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                       }
+                    }
+                }
+            }
+        };
         Thread aThread = new Thread() {
             @Override
             public void run() {
@@ -22,6 +37,7 @@ public class ConcurrencyApplication {
                     a();
                     b();
                     System.out.format("a = %d b =%d", a, b);
+                    notifyAll();
                 }
             }
         };
@@ -39,9 +55,9 @@ public class ConcurrencyApplication {
                                 e.printStackTrace();
                             }
                         }
+                        c(a);
+                        notifyAll();
                     }
-                    c(a);
-                    notifyAll();
                 }
                 synchronized (obj) {
                     while (b == 0) {
@@ -53,11 +69,13 @@ public class ConcurrencyApplication {
                     }
                     d(c + b);
                     notifyAll();
+                    System.out.format("a=%d b=%d c=%d d=%d\n", a, b, c, d);
                 }
             }
         };
         aThread.start();
         bThread.start();
+        notifier.start();
 
     }
 

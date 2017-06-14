@@ -41,7 +41,7 @@ public class SynchronizedCounter {
                 }
             }
             Long end = System.currentTimeMillis();
-            syncDecrTime = start - end;
+            syncDecrTime = end - start ;
         }
         );
         return decrementatorThread;
