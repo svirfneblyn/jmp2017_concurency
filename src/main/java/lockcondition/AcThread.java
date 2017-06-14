@@ -1,4 +1,6 @@
-package waitnitify;
+package lockcondition;
+
+import cache.Cache;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -10,6 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Ihar_Rubanovich.
  */
 public class AcThread implements Runnable {
+
     private final Cache cache;
     private final Lock lock;
     private final Condition condition;
@@ -18,7 +21,6 @@ public class AcThread implements Runnable {
         this.cache = cache;
         lock = new ReentrantLock();
         condition = lock.newCondition();
-
     }
 
     @Override

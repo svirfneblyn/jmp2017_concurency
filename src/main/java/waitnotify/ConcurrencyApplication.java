@@ -1,22 +1,27 @@
+package waitnotify;
+
 /**
  * Created by.
  *
  * @author Ihar_rubanovich.
  */
 public class ConcurrencyApplication {
+
     static int a;
     static int b;
     static int c;
     static int d;
+    static final Object obj = new Object();
 
     public static void main(String[] args) {
+
         Thread aThread = new Thread() {
             @Override
             public void run() {
-                synchronized (this) {
+                synchronized (obj) {
                     a();
                     b();
-                    System.out.format("a = %d b =%d",a,b);
+                    System.out.format("a = %d b =%d", a, b);
                 }
             }
         };
@@ -25,18 +30,20 @@ public class ConcurrencyApplication {
 
             @Override
             public void run() {
-                synchronized (this) {
-                    while (a == 0) {
-                        try {
-                            wait(10);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                synchronized (obj) {
+                    while (c == 0) {
+                        if (a == 0) {
+                            try {
+                                wait();
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                     c(a);
                     notifyAll();
                 }
-                synchronized (this) {
+                synchronized (obj) {
                     while (b == 0) {
                         try {
                             wait(10);
@@ -46,7 +53,6 @@ public class ConcurrencyApplication {
                     }
                     d(c + b);
                     notifyAll();
-                    System.out.format("a=%d b=%d c=%d d=%d\n", a, b, c, d);
                 }
             }
         };

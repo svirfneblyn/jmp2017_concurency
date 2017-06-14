@@ -1,6 +1,8 @@
-import waitnitify.AbThread;
-import waitnitify.AcThread;
-import waitnitify.Cache;
+package lockcondition;
+
+import cache.Cache;
+import lockcondition.AbThread;
+import lockcondition.AcThread;
 
 /**
  * Created by.

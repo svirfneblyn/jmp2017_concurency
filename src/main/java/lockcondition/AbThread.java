@@ -1,4 +1,6 @@
-package waitnitify;
+package lockcondition;
+
+import cache.Cache;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -55,8 +57,7 @@ public class AbThread implements Runnable {
             }
         } finally {
             lock.unlock();
-            System.out.format("a=%d b=%d c=%d d=%d\n", cache.getA(), cache.getB(), cache.getC(), cache.getC());
-        }
+            System.out.println(cache.toString());        }
     }
 }
 

@@ -1,8 +1,4 @@
-package waitnitify;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+package cache;
 
 /**
  * Created by.
@@ -14,6 +10,7 @@ public class Cache {
     private int b;
     private int c;
     private int d;
+
     public volatile boolean available;
 
 
@@ -91,5 +88,10 @@ public class Cache {
 
     public void setD(int d) {
         this.d = d;
+    }
+
+    @Override
+    public String toString() {
+        return "a =" + a + "b = " + b + " c =" + c+ " d = " + d;
     }
 }
